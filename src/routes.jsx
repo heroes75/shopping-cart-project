@@ -10,6 +10,7 @@ const routes = [
     children: [
       {
         index: true,
+        path: 'homepage',
         element: <Homepage />,
       },
       {
