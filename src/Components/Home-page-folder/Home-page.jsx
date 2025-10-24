@@ -1,7 +1,7 @@
 export default function Homepage() {
     return (
-        <>
-            <h1>this is home page</h1>
-        </>
+        <section data-testid='homepage'>
+            <h1>this is the homepage</h1>
+        </section>
     )
 }
