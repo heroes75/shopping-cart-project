@@ -7,15 +7,30 @@ import CartPage from "./Components/Cart-page-folder/Cart-page";
 
 function App() {
   const { name } = useParams();
-  const [products, setProducts] = useState(null)
+  const [products, setProducts] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products/')
-    .then(res => res.json())
-    .then(res => {
-      console.log('res:', res)
-    })
-  })
+    fetch("https://fakestoreapi.com/products/", { mode: 'cors'})
+      .then((res) => {
+        if (res.status >= 400) {
+          throw new Error("server error");
+        }
+        console.log("res:", typeof res);
+        return res.json();
+      })
+      .then((res) => {
+        console.log("res:", res);
+        setProducts(res);
+        // cons
+      })
+      .catch(() => {
+        setError(true)
+      })
+      .finally(() => setLoading(false));
+  }, []);
+  if (loading) return <h1>LOADING...</h1>;
   return (
     <>
       <nav data-testid="nav">
@@ -32,15 +47,13 @@ function App() {
         </ol>
       </nav>
       <main>
-        {
-          name === 'shop' ? (
-            <ShopPage />
-          ) : name === 'cart' ?
-          (
-            <CartPage />
-          ) :
-          (<Homepage />)
-        }
+        {name === "shop" ? (
+          <ShopPage products={products} />
+        ) : name === "cart" ? (
+          <CartPage />
+        ) : (
+          <Homepage />
+        )}
         {/* <Outlet /> */}
       </main>
     </>
