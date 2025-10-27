@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CardShop({ title, price, rating, image }) {
+export default function CardShop({ title, price, rating, image, category }) {
   const [count, setCount] = useState(1);
 
   function increase() {
@@ -15,7 +15,7 @@ export default function CardShop({ title, price, rating, image }) {
   }
 
   return (
-    <div>
+    <div role='figure' data-testid={category}>
       <img src={image} alt={`image of ${title}`} />
       <p>{title}</p>
       <span>{price}</span>
@@ -33,6 +33,7 @@ export default function CardShop({ title, price, rating, image }) {
       <button onClick={increase} aria-label="increment">
         +
       </button>
+      <button>Add to Cart</button>
     </div>
   );
 }

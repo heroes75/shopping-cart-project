@@ -52,6 +52,10 @@ describe('test card card component', () => {
         render(<MemoryRouter><CardShop /></MemoryRouter>);
         expect(screen.getByPlaceholderText('0')).toBeInTheDocument()
     })
+    test('should have a "Add to Cart" button', () => {
+         render(<MemoryRouter><CardShop /></MemoryRouter>);
+        expect(screen.getByRole('button', {name: 'Add to Cart'})).toBeInTheDocument()
+    })
     test('click on button increment should increase the input value by one', async () => {
         const user = userEvent.setup()
         render(<MemoryRouter><CardShop /></MemoryRouter>)

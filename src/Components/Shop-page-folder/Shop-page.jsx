@@ -1,13 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import CardShop from "./Card-shop";
 
 export default function ShopPage({products}) {
+    const [filteredProducts, setFilteredProducts] = useState(products)
+    function filterProduct(category) {
+        setFilteredProducts(products.filter(el => el.category === category))
+    }
     return (
         <section data-testid='shop-page'>
+            <div id="sideBar">
+                <div><label htmlFor="category">men's clothing</label><input onChange={() => filterProduct("men's clothing")} type="radio" name="category-choice" id="category" /></div>
+            </div>
             <h1>this is Shop Page</h1>
-            {products.map(el => <h4 key={el.id}>{el.title}</h4>)}
-            {/* <h4>Mens Cotton Jacket</h4>
-            <h4>Mens Casual Premium Slim Fit T-Shirts</h4>
-            <h4>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</h4> */}
+            {filteredProducts.map(el => <CardShop category={el.category} price={el.price} rating={el.rating.rate} image={el.image} title={el.title} key={el.id}/>)}
         </section>
     )
 }
