@@ -13,7 +13,7 @@ const router = createMemoryRouter(routes);
 
 describe("test nav Bar Component", () => {
   window.fetch = vi.fn(() =>
-    Promise.resolve({ json: () => Promise.resolve(true) })
+    Promise.resolve({ json: () => Promise.resolve([]) })
   );
   test("should have a nav bar", async () => {
     render(<RouterProvider router={router} />);
@@ -132,4 +132,12 @@ describe("test the handle of fetch Product", () => {
     expect(screen.getByText("Mens Casual Premium Slim Fit T-Shirts")).toBeInTheDocument();
     expect(screen.getByText("Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops")).toBeInTheDocument();
   });
+  test('if the fetch don\'t work should display a error message', async () => {
+    window.fetch = vi.fn(() => {
+      return Promise.reject( ()=> console.error('no data fetch'))
+    })
+    render(<RouterProvider router={router}/>)
+  expect(await screen.findByRole('heading', {name: 'Error no data fetch'})).toBeInTheDocument()
+  })
+  
 });

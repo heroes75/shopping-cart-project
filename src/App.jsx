@@ -9,7 +9,7 @@ function App() {
   const { name } = useParams();
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/", { mode: 'cors'})
@@ -17,7 +17,6 @@ function App() {
         if (res.status >= 400) {
           throw new Error("server error");
         }
-        console.log("res:", typeof res);
         return res.json();
       })
       .then((res) => {
@@ -30,6 +29,8 @@ function App() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  if(error) return <h1>Error no data fetch</h1>
   if (loading) return <h1>LOADING...</h1>;
   return (
     <>
