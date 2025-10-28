@@ -5,12 +5,17 @@ export default function ShopPage({ products }) {
   const [filteredProducts, setFilteredProducts] = useState(products);
   // const [sortedProducts, setSortedProducts] = useState(filteredProducts)
   const [checkedSort, setCheckedStore] = useState(false);
+  const [checkedSortByRating, setCheckedStoreByRating] = useState(false);
   function sortProducts() {
     setFilteredProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
+  }
+  function sortProductsByRating() {
+    setFilteredProducts((prev) => [...prev].sort((a, b) => b.rating.rate - a.rating.rate));
   }
   function filterProduct(category) {
     setFilteredProducts(products.filter((el) => el.category === category));
     setCheckedStore(false);
+    setCheckedStoreByRating(false)
   }
   return (
     <section data-testid="shop-page">
@@ -68,11 +73,26 @@ export default function ShopPage({ products }) {
             onChange={(e) => {
               sortProducts();
               setCheckedStore(e.target.checked);
+              setCheckedStoreByRating(!e.target.checked);
             }}
-            type="checkbox"
+            type="radio"
             name="sort-choice"
             id="sort-by-price"
             checked={checkedSort}
+          />
+        </div>
+        <div>
+          <label htmlFor="sort-by-rating">Sort by rating</label>
+          <input
+            onChange={(e) => {
+              sortProductsByRating();
+              setCheckedStoreByRating(e.target.checked);
+              setCheckedStore(!e.target.checked);
+            }}
+            type="radio"
+            name="sort-choice"
+            id="sort-by-rating"
+            checked={checkedSortByRating}
           />
         </div>
       </div>

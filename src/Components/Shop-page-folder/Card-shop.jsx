@@ -19,7 +19,7 @@ export default function CardShop({ title, price, rating, image, category }) {
       <img src={image} alt={`image of ${title}`} />
       <p>{title}</p>
       <span aria-label="price">{price}</span>
-      <span>{rating}</span>
+      <span aria-label="rating">{rating}</span>
       <button onClick={decrease} aria-label="decrement">
         -
       </button>
