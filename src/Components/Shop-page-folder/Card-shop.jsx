@@ -4,7 +4,7 @@ export default function CardShop({ title, price, rating, image, category }) {
   const [count, setCount] = useState(1);
 
   function increase() {
-    setCount((prev) => prev + 1);
+    setCount((prev) => +prev + 1);
   }
 
   function decrease() {
@@ -18,7 +18,7 @@ export default function CardShop({ title, price, rating, image, category }) {
     <div role='figure' data-testid={category}>
       <img src={image} alt={`image of ${title}`} />
       <p>{title}</p>
-      <span>{price}</span>
+      <span aria-label="price">{price}</span>
       <span>{rating}</span>
       <button onClick={decrease} aria-label="decrement">
         -
