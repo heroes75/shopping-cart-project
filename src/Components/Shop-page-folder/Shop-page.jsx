@@ -3,7 +3,6 @@ import CardShop from "./Card-shop";
 
 export default function ShopPage({ products, updateCart }) {
   const [filteredProducts, setFilteredProducts] = useState(products);
-  // const [sortedProducts, setSortedProducts] = useState(filteredProducts)
   const [checkedSort, setCheckedStore] = useState(false);
   const [checkedSortByRating, setCheckedStoreByRating] = useState(false);
   function sortProducts() {

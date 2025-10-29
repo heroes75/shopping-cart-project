@@ -1,9 +1,8 @@
-import { screen, render, getAllByRole } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import { describe, test, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import ShopPage from "./Shop-page";
-import { useState } from "react";
 const product1 = {
   id: 2,
   title: "Mens Casual Premium Slim Fit T-Shirts ",

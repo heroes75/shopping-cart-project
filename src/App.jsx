@@ -38,6 +38,7 @@ function App() {
       })
       .then((res) => {
         setProducts(res);
+        console.log('res:', res)
       })
       .catch(() => {
         setError(true);
@@ -67,7 +68,7 @@ function App() {
         {name === "shop" ? (
           <ShopPage products={products} updateCart={updateCart} />
         ) : name === "cart" ? (
-          <CartPage />
+          <CartPage cartItems={cartItems} products={products} />
         ) : (
           <Homepage />
         )}
