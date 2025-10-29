@@ -184,24 +184,19 @@ describe("test Shop-page component", () => {
     });
   });
   describe('test "Add to cart Button" on shop page', () => {
-    vi.mock("../App.jsx", () => {
-      return {
-        default: vi.fn(() => {
-          const [cartItems, setCartItems] = useState([]);
-          function updateCart(obj) {
-            setCartItems([...cartItems, obj]);
-          }
-          return <span>cartItems</span>;
-        }),
-      };
-    });
-    test('when click on "Add to cart"should update the cart logo', async () => {
+    const updateCart = vi.fn(() => {})
+    test('when click on "Add to cart" should call the updateCart function', async () => {
       const user = userEvent.setup();
       render(
         <MemoryRouter>
-          <ShopPage products={products} />
+          <ShopPage products={products} updateCart={updateCart} />
         </MemoryRouter>
       );
+      const buttons = screen.getAllByRole('button', {name: 'Add to Cart'})
+      await user.click(buttons[0])
+      await user.click(buttons[0])
+      await user.click(buttons[0])
+      expect(updateCart).toHaveBeenCalledTimes(3)
     });
   });
 });

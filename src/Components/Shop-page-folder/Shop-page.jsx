@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import CardShop from "./Card-shop";
 
-export default function ShopPage({ products }) {
+export default function ShopPage({ products, updateCart }) {
   const [filteredProducts, setFilteredProducts] = useState(products);
   // const [sortedProducts, setSortedProducts] = useState(filteredProducts)
   const [checkedSort, setCheckedStore] = useState(false);
@@ -105,6 +105,8 @@ export default function ShopPage({ products }) {
           image={el.image}
           title={el.title}
           key={el.id}
+          updateCart={updateCart}
+          id={el.id}
         />
       ))}
     </section>

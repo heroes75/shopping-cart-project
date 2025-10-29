@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CardShop({ title, price, rating, image, category }) {
+export default function CardShop({ title, price, rating, image, category, updateCart, id }) {
   const [count, setCount] = useState(1);
 
   function increase() {
@@ -33,7 +33,7 @@ export default function CardShop({ title, price, rating, image, category }) {
       <button onClick={increase} aria-label="increment">
         +
       </button>
-      <button>Add to Cart</button>
+      <button onClick={() => updateCart({id: id, numberOfItems: count})}>Add to Cart</button>
     </div>
   );
 }

@@ -10,9 +10,26 @@ function App() {
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  function updateCart(obj) {
+    const copy = [...cartItems]
+    if(copy.filter(el => el.id === obj.id).length === 0) {
+      setCartItems([...cartItems, obj])
+      return
+    }
+    for (const el of copy) {
+      if(el.id === obj.id) el.numberOfItems +=  obj.numberOfItems
+    }
+    setCartItems([...copy]);
+  }
+
+  function allItems() {
+    console.log('cartItems:', cartItems)
+    return cartItems.reduce((acc, cur) => acc + cur.numberOfItems, 0)
+  }
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/", { mode: 'cors'})
+    fetch("https://fakestoreapi.com/products/", { mode: "cors" })
       .then((res) => {
         if (res.status >= 400) {
           throw new Error("server error");
@@ -20,17 +37,15 @@ function App() {
         return res.json();
       })
       .then((res) => {
-        console.log("res:", res);
         setProducts(res);
-        // cons
       })
       .catch(() => {
-        setError(true)
+        setError(true);
       })
       .finally(() => setLoading(false));
   }, []);
 
-  if(error) return <h1>Error no data fetch</h1>
+  if (error) return <h1>Error no data fetch</h1>;
   if (loading) return <h1>LOADING...</h1>;
   return (
     <>
@@ -43,13 +58,14 @@ function App() {
             <Link to="/shop">Shop</Link>
           </li>
           <li>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">Cart</Link> {" "}
+            <span data-testid="number-of-items-of-card">{allItems()}</span>
           </li>
         </ol>
       </nav>
       <main>
         {name === "shop" ? (
-          <ShopPage products={products} />
+          <ShopPage products={products} updateCart={updateCart} />
         ) : name === "cart" ? (
           <CartPage />
         ) : (
