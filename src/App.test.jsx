@@ -187,13 +187,79 @@ describe('test the "Add to card" button in shop-page', () => {
     render(<RouterProvider router={router} />);
     const shopPageLink = await screen.findByText("Shop");
     await user.click(shopPageLink);
-    screen.debug()
-    const buttons = screen.getAllByRole('button', {name: 'Add to Cart'})
+    screen.debug();
+    const buttons = screen.getAllByRole("button", { name: "Add to Cart" });
     await user.click(buttons[0]);
     await user.click(buttons[0]);
     await user.click(buttons[1]);
     await user.click(buttons[1]);
     await user.click(buttons[1]);
-    expect(screen.getByTestId('number-of-items-of-card').textContent).toBe('5')
+    expect(screen.getByTestId("number-of-items-of-card").textContent).toBe("5");
+  });
+});
+
+describe("test the delete button, the increment button and the decrement button in cart page", () => {
+  window.fetch = vi.fn(() => {
+    const products = [
+      {
+        id: 1,
+        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+        price: 109.95,
+        description:
+          "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        category: "men's clothing",
+        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
+        rating: {
+          rate: 3.9,
+          count: 120,
+        },
+      },
+      {
+        id: 2,
+        title: "Mens Casual Premium Slim Fit T-Shirts ",
+        price: 22.3,
+        description:
+          "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+        category: "men's clothing",
+        image:
+          "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png",
+        rating: {
+          rate: 4.1,
+          count: 259,
+        },
+      },
+    ];
+    return Promise.resolve({
+      json: () => Promise.resolve(products),
+    });
+  });
+  const cartItems = [
+    {
+      id: 1,
+      numberOfItems: 3,
+    },
+    {
+      id: 2,
+      numberOfItems: 2,
+    },
+  ];
+  test("when i click on delete button on card product should delete this items on cart", async () => {
+	const user = userEvent.setup()
+	render(<RouterProvider router={router} />);
+    const shopPageLink = await screen.findByText("Shop");
+	const cartPageLink = await screen.findByText("Cart");
+    await user.click(shopPageLink);
+    screen.debug();
+    const buttons = screen.getAllByRole("button", { name: "Add to Cart" });
+    await user.click(buttons[0]);
+    await user.click(buttons[0]);
+    await user.click(buttons[0]);
+    await user.click(buttons[1]);
+    await user.click(buttons[1]);
+	await user.click(cartPageLink);
+	const buttonsDelete = screen.getAllByRole("button", { name: "✖" });
+	await user.click(buttonsDelete[1]);
+	screen.debug()
+	expect(screen.getAllByRole("button", { name: "✖" }).length).toBe(1);
   });
 });

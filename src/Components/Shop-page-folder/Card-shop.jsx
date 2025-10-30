@@ -28,7 +28,7 @@ export default function CardShop({ title, price, rating, image, category, update
         value={count}
         min={0}
         placeholder="0"
-        onChange={(e) => setCount(e.target.value)}
+        onChange={(e) => setCount(+e.target.value)}
       />
       <button onClick={increase} aria-label="increment">
         +

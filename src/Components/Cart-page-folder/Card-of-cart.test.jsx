@@ -55,6 +55,14 @@ describe("test card Cart", () => {
     );
     expect(screen.getByPlaceholderText("0")).toBeInTheDocument();
   });
+  test("should be have a button to delete card", () => {
+    render(
+      <MemoryRouter>
+        <CardOfCart />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('button', {name: "✖"})).toBeInTheDocument()
+  })
   test("click on button increment should increase the input value by one", async () => {
     const user = userEvent.setup();
     render(

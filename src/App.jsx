@@ -11,6 +11,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+
   function updateCart(obj) {
     const copy = [...cartItems]
     if(copy.filter(el => el.id === obj.id).length === 0) {
@@ -22,9 +23,13 @@ function App() {
     }
     setCartItems([...copy]);
   }
-
+  function deleteItemsCart(id) {
+	const copy = [...cartItems]
+	const index = cartItems.findIndex(el => el.id === id)
+	copy.splice(index, 1)
+	setCartItems(copy)
+  }
   function allItems() {
-    console.log('cartItems:', cartItems)
     return cartItems.reduce((acc, cur) => acc + cur.numberOfItems, 0)
   }
 
@@ -68,7 +73,7 @@ function App() {
         {name === "shop" ? (
           <ShopPage products={products} updateCart={updateCart} />
         ) : name === "cart" ? (
-          <CartPage cartItems={cartItems} products={products} />
+          <CartPage cartItems={cartItems} products={products} deleteItemsCart={deleteItemsCart} />
         ) : (
           <Homepage />
         )}
