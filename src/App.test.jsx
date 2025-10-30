@@ -244,10 +244,10 @@ describe("test the delete button, the increment button and the decrement button 
     },
   ];
   test("when i click on delete button on card product should delete this items on cart", async () => {
-	const user = userEvent.setup()
-	render(<RouterProvider router={router} />);
+    const user = userEvent.setup();
+    render(<RouterProvider router={router} />);
     const shopPageLink = await screen.findByText("Shop");
-	const cartPageLink = await screen.findByText("Cart");
+    const cartPageLink = await screen.findByText("Cart");
     await user.click(shopPageLink);
     screen.debug();
     const buttons = screen.getAllByRole("button", { name: "Add to Cart" });
@@ -256,10 +256,59 @@ describe("test the delete button, the increment button and the decrement button 
     await user.click(buttons[0]);
     await user.click(buttons[1]);
     await user.click(buttons[1]);
-	await user.click(cartPageLink);
-	const buttonsDelete = screen.getAllByRole("button", { name: "✖" });
-	await user.click(buttonsDelete[1]);
-	screen.debug()
-	expect(screen.getAllByRole("button", { name: "✖" }).length).toBe(1);
+    await user.click(cartPageLink);
+    const buttonsDelete = screen.getAllByRole("button", { name: "✖" });
+    await user.click(buttonsDelete[1]);
+    screen.debug();
+    expect(screen.getAllByRole("button", { name: "✖" }).length).toBe(1);
+  });
+  test("when i click on increment button on card product should increment the numbers items on cart", async () => {
+    const user = userEvent.setup();
+    render(<RouterProvider router={router} />);
+    const shopPageLink = await screen.findByText("Shop");
+    const cartPageLink = await screen.findByText("Cart");
+    await user.click(shopPageLink);
+    screen.debug();
+    const buttons = screen.getAllByRole("button", { name: "Add to Cart" });
+    await user.click(buttons[0]);
+    await user.click(buttons[0]);
+    await user.click(buttons[0]);
+    await user.click(buttons[1]);
+    await user.click(buttons[1]);
+    await user.click(cartPageLink);
+    const buttonsIncrement = screen.getAllByRole("button", { name: "+" });
+    const input = screen.getAllByPlaceholderText("0");
+    await user.click(buttonsIncrement[1]);
+    await user.click(buttonsIncrement[1]);
+    await user.click(buttonsIncrement[0]);
+    await user.click(buttonsIncrement[0]);
+    expect(+input[1].value).toBe(4);
+    expect(+input[0].value).toBe(5);
+	expect(screen.getByTestId("number-of-items-of-card").textContent).toBe("9");
+  });
+  test("when i click on decrement button on card product should decrement the numbers items on cart", async () => {
+    const user = userEvent.setup();
+    render(<RouterProvider router={router} />);
+    const shopPageLink = await screen.findByText("Shop");
+    const cartPageLink = await screen.findByText("Cart");
+    await user.click(shopPageLink);
+    screen.debug();
+    const buttons = screen.getAllByRole("button", { name: "Add to Cart" });
+    await user.click(buttons[0]);
+    await user.click(buttons[0]);
+    await user.click(buttons[0]);
+    await user.click(buttons[1]);
+    await user.click(buttons[1]);
+    await user.click(buttons[1]);
+    await user.click(cartPageLink);
+    const buttonsIncrement = screen.getAllByRole("button", { name: "-" });
+    const input = screen.getAllByPlaceholderText("0");
+    await user.click(buttonsIncrement[1]);
+    await user.click(buttonsIncrement[1]);
+    await user.click(buttonsIncrement[0]);
+    await user.click(buttonsIncrement[0]);
+    expect(+input[1].value).toBe(1);
+    expect(+input[0].value).toBe(1);
+	expect(screen.getByTestId("number-of-items-of-card").textContent).toBe("2");
   });
 });

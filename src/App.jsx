@@ -23,6 +23,28 @@ function App() {
     }
     setCartItems([...copy]);
   }
+  function increaseItemsCart(id) {
+    const copy = [...cartItems]
+    for (const el of copy) {
+      if(el.id === id) el.numberOfItems +=  1
+    }
+    setCartItems([...copy]);
+  }
+  
+  function decreaseItemsCart(id) {
+    const copy = [...cartItems]
+    for (const el of copy) {
+      if(el.id === id) el.numberOfItems -=  1
+    }
+    setCartItems([...copy]);
+  }
+  function updateItemsCart(id, value) {
+    const copy = [...cartItems]
+    for (const el of copy) {
+      if(el.id === id) el.numberOfItems =  value
+    }
+    setCartItems([...copy]);
+  }
   function deleteItemsCart(id) {
 	const copy = [...cartItems]
 	const index = cartItems.findIndex(el => el.id === id)
@@ -73,7 +95,7 @@ function App() {
         {name === "shop" ? (
           <ShopPage products={products} updateCart={updateCart} />
         ) : name === "cart" ? (
-          <CartPage cartItems={cartItems} products={products} deleteItemsCart={deleteItemsCart} />
+          <CartPage cartItems={cartItems} products={products} deleteItemsCart={deleteItemsCart} increaseItemsCart={increaseItemsCart} decreaseItemsCart={decreaseItemsCart} updateItemsCart={updateItemsCart} />
         ) : (
           <Homepage />
         )}

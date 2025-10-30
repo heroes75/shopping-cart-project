@@ -56,7 +56,7 @@ const products = [
 ];
 const subtotal = 109.95 * 3 + 22.3 * 2;
 const tax = subtotal * 20 / 100;
-const totalItems = subtotal + tax+ 20
+const totalItems = subtotal + tax + 20
 
 describe("test cart page component ", () => {
   test("should have 3 components of cardOfCart", () => {

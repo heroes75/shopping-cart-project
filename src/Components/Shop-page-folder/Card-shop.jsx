@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from './Card-shop.module.css'
 
 export default function CardShop({ title, price, rating, image, category, updateCart, id }) {
   const [count, setCount] = useState(1);
@@ -15,24 +16,27 @@ export default function CardShop({ title, price, rating, image, category, update
   }
 
   return (
-    <div role='figure' data-testid={category}>
-      <img src={image} alt={`image of ${title}`} />
+    <div className={styles.cardContainer} role='figure' data-testid={category}>
+      <img className= {`${styles.img}`} src={image} alt={`image of ${title}`} />
       <p>{title}</p>
-      <span aria-label="price">{price}</span>
-      <span aria-label="rating">{rating}</span>
-      <button onClick={decrease} aria-label="decrement">
-        -
-      </button>
-      <input
-        type="number"
-        value={count}
-        min={0}
-        placeholder="0"
-        onChange={(e) => setCount(+e.target.value)}
-      />
-      <button onClick={increase} aria-label="increment">
-        +
-      </button>
+      <div><span>Price</span><span aria-label="price">{price}</span></div>
+      <div><span>Rating</span><span aria-label="rating">{rating}</span></div>
+      <div className="inputContainer">
+        <button className={styles.decrement} onClick={decrease} aria-label="decrement">
+          -
+        </button>
+        <input
+        className={styles.input}
+          type="number"
+          value={count}
+          min={0}
+          placeholder="0"
+          onChange={(e) => setCount(+e.target.value)}
+        />
+        <button className={styles.increment} onClick={increase} aria-label="increment">
+          +
+        </button>
+      </div>
       <button onClick={() => updateCart({id: id, numberOfItems: count})}>Add to Cart</button>
     </div>
   );

@@ -1,6 +1,6 @@
 import CardOfCart from "./Card-of-cart";
 
-export default function CartPage({ products, cartItems, deleteItemsCart }) {
+export default function CartPage({ products, cartItems, deleteItemsCart, increaseItemsCart, decreaseItemsCart, updateItemsCart }) {
   const subtotal = cartItems.reduce((acc, cur) => acc + products[cur.id - 1].price * cur.numberOfItems, 0);
   const shippingFees = 20;
   const tax = subtotal * 20 / 100;
@@ -20,6 +20,9 @@ export default function CartPage({ products, cartItems, deleteItemsCart }) {
             id={products[el.id - 1].id}
             numberOfItems={el.numberOfItems}
             deleteItemsCart={deleteItemsCart}
+            increaseItemsCart={increaseItemsCart}
+            decreaseItemsCart= {decreaseItemsCart}
+            updateItemsCart={updateItemsCart}
           />
         ))
       )}

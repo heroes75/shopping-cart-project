@@ -1,0 +1,37 @@
+.img {
+    width: 40%;
+}
+
+/* .cardContainer {
+    display: flex;
+    flex-direction: column;
+} */
+
+.cardContainer div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 200px;
+}
+
+.cardContainer p {
+    font-weight: bold;
+}
+
+.decrement, .increment {
+    padding: 10px 16px;
+    font-size: 22px;
+    background-color: blue;
+}
+
+.input {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.inputContainer {
+    max-width: 100px;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
