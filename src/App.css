@@ -5,8 +5,9 @@
 }
 
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   text-align: center;
+  height: 100%;
 }
 
 *, *::after,*::before {
@@ -35,3 +36,8 @@ nav {
   background-color: darkmagenta;
   padding: 25px 45px;
 }
+
+/* main {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+} */

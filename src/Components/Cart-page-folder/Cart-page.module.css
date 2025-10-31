@@ -1,0 +1,23 @@
+.div {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    margin: auto 5px;
+    flex-wrap: wrap;
+}
+
+.div :first-child {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.div:last-child {
+    align-self: end;
+}
+
+
+.summary {
+    display: flex;
+    justify-content: center;
+}
+

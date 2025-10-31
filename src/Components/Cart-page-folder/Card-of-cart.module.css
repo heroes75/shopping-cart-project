@@ -1,0 +1,47 @@
+img {
+    width: 20%;
+}
+.cardContainer {
+    display: flex;
+    padding: 0 15px;
+    margin: 0 10px;
+}
+
+.close {
+    align-self: start;
+    padding: 15px 32px;
+    background-color: red;
+    border-radius: 15px;
+}
+.title {
+    align-self: center;
+    font-weight: bold;
+}
+
+.price {
+    align-self: end;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.button {
+    composes: close;
+    align-self: center;
+    background-color: blue;
+}
+
+input {
+    align-self: center;
+    border: none;
+    background-color: inherit;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    img {
+        width: 50%;
+    }
+    .cardContainer {
+        flex-direction: column;
+    }
+}

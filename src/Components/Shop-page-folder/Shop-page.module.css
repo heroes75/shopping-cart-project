@@ -1,0 +1,41 @@
+.productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+
+#sideBar{
+    display: flex;
+
+}
+
+.categorySelect, .sortSelect {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.name {
+    font-weight: 400;
+    font-size: 22px;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 3px;
+}
+
+.inputContainer input {
+    margin-bottom: -5px;
+}
+
+@media (max-width: 500px) {
+    .categorySelect {
+        flex-direction: column;
+    }
+}

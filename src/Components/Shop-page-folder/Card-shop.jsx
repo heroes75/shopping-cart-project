@@ -17,11 +17,11 @@ export default function CardShop({ title, price, rating, image, category, update
 
   return (
     <div className={styles.cardContainer} role='figure' data-testid={category}>
-      <img className= {`${styles.img}`} src={image} alt={`image of ${title}`} />
-      <p>{title}</p>
-      <div><span>Price</span><span aria-label="price">{price}</span></div>
-      <div><span>Rating</span><span aria-label="rating">{rating}</span></div>
-      <div className="inputContainer">
+      <div className={styles.imgContainer}><img className= {`${styles.img}`} src={image} alt={`image of ${title}`} /></div>
+      <p className={styles.title}>{title}</p>
+      <div className={styles.price}><span>Price</span><span aria-label="price">{price}</span></div>
+      <div className={styles.rating}><span>Rating</span><span aria-label="rating">{rating}</span></div>
+      <div className={styles.inputContainer}>
         <button className={styles.decrement} onClick={decrease} aria-label="decrement">
           -
         </button>
@@ -37,7 +37,7 @@ export default function CardShop({ title, price, rating, image, category, update
           +
         </button>
       </div>
-      <button onClick={() => updateCart({id: id, numberOfItems: count})}>Add to Cart</button>
+      <button className={styles.addButton} onClick={() => updateCart({id: id, numberOfItems: count})}>Add to Cart</button>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import CardOfCart from "./Card-of-cart";
+import styles from "./Cart-page.module.css"
 
 export default function CartPage({ products, cartItems, deleteItemsCart, increaseItemsCart, decreaseItemsCart, updateItemsCart }) {
   const subtotal = cartItems.reduce((acc, cur) => acc + products[cur.id - 1].price * cur.numberOfItems, 0);
@@ -27,12 +28,12 @@ export default function CartPage({ products, cartItems, deleteItemsCart, increas
         ))
       )}
 
-      <section>
+      <section className={styles.summary}>
         <div>
-          <div><span aria-label="subtotal">{cartItems.reduce((acc, cur) => acc + products[cur.id - 1].price * cur.numberOfItems, 0)}</span></div>
-          <div><span aria-label="shipping-fees">20</span></div>
-          <div><span aria-label="tax">{subtotal * 20 / 100}</span></div>
-          <span aria-label="total">{total}</span>
+          <div className={styles.div}><span>Subtotal</span><span aria-label="subtotal">{cartItems.reduce((acc, cur) => acc + products[cur.id - 1].price * cur.numberOfItems, 0)}</span></div>
+          <div className={styles.div}><span>Shipping-Fees</span><span aria-label="shipping-fees">20</span></div>
+          <div className={styles.div}><span>Tax</span><span aria-label="tax">{subtotal * 20 / 100}</span></div>
+          <div className={styles.div}><span>Total</span><span aria-label="total">{total}</span></div>
         </div>
       </section>
     </section>
